@@ -476,6 +476,11 @@
     "ProviderCompat": {
       "type": "object",
       "properties": {
+        "supportsInContextCompaction": {
+          "type": "boolean",
+          "description": "Whether the model preserves its prompt cache when compaction appends system and user messages with toolChoice \"none\". Requires supportsMidConvoSystemMessages. The generated catalog enables this for verified models.",
+          "default": false
+        },
         "supportsStore": {
           "type": "boolean",
           "description": "Whether the provider supports the store field. Default: auto-detected from URL."

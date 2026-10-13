@@ -86,6 +86,11 @@
           "type": "boolean",
           "default": true
         },
+        "inContext": {
+          "type": "boolean",
+          "description": "Summarize inside the cached conversation on verified models when cheaper.",
+          "default": false
+        },
         "reserveTokens": {
           "type": "integer",
           "minimum": 0,

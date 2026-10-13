@@ -187,6 +187,11 @@ function optionalSessionAffinityFormat(options?: TSchemaOptions) {
 
 export const OpenAICompletionsCompatSchema = Type.Object(
 	{
+		supportsInContextCompaction: optionalCompatBoolean({
+			description:
+				'Whether the model preserves its prompt cache when compaction appends system and user messages with toolChoice "none". Requires supportsMidConvoSystemMessages. The generated catalog enables this for verified models.',
+			default: false,
+		}),
 		supportsStore: Type.Optional(
 			Type.Boolean({
 				description: "Whether the provider supports the store field. Default: auto-detected from URL.",
@@ -351,6 +356,11 @@ export const OpenAICompletionsCompatSchema = Type.Object(
 
 export const OpenAIResponsesCompatSchema = Type.Object(
 	{
+		supportsInContextCompaction: optionalCompatBoolean({
+			description:
+				'Whether the model preserves its prompt cache when compaction appends system and user messages with toolChoice "none". Requires supportsMidConvoSystemMessages. The generated catalog enables this for verified models.',
+			default: false,
+		}),
 		supportsDeveloperRole: optionalCompatBoolean({
 			description: "Whether the provider supports the developer role instead of system.",
 			default: true,
@@ -408,6 +418,11 @@ export const OpenAIResponsesCompatSchema = Type.Object(
 
 export const AnthropicMessagesCompatSchema = Type.Object(
 	{
+		supportsInContextCompaction: optionalCompatBoolean({
+			description:
+				'Whether the model preserves its prompt cache when compaction appends system and user messages with toolChoice "none". Requires supportsMidConvoSystemMessages. The generated catalog enables this for verified models.',
+			default: false,
+		}),
 		supportsEagerToolInputStreaming: Type.Optional(
 			Type.Boolean({
 				description:
@@ -505,6 +520,11 @@ export const BedrockCompatSchema = Type.Object(
 
 export const MistralConversationsCompatSchema = Type.Object(
 	{
+		supportsInContextCompaction: optionalCompatBoolean({
+			description:
+				'Whether the model preserves its prompt cache when compaction appends system and user messages with toolChoice "none". Requires supportsMidConvoSystemMessages. The generated catalog enables this for verified models.',
+			default: false,
+		}),
 		supportsMidConvoSystemMessages: optionalCompatBoolean({
 			description:
 				"Whether the exact model accepts system messages after the conversation has started. When false, later system messages are folded into the leading system message.",
@@ -515,6 +535,11 @@ export const MistralConversationsCompatSchema = Type.Object(
 );
 
 const ProviderCompatPropertyOverrides = {
+	supportsInContextCompaction: optionalCompatBoolean({
+		description:
+			'Whether the model preserves its prompt cache when compaction appends system and user messages with toolChoice "none". Requires supportsMidConvoSystemMessages. The generated catalog enables this for verified models.',
+		default: false,
+	}),
 	supportsDeveloperRole: optionalCompatBoolean({
 		description: "Whether the provider supports the developer role instead of system. Defaults are API-specific.",
 	}),

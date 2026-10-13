@@ -179,6 +179,7 @@ type ResolvedOpenAICompletionsCompat = Omit<
 	| "thinkingTokenBudgetField"
 	| "supportsMidConvoSystemMessages"
 	| "supportsMidConvoToolAdditions"
+	| "supportsInContextCompaction"
 	| "vllmPriority"
 > & {
 	cacheControlFormat?: OpenAICompletionsCompat["cacheControlFormat"];
@@ -186,6 +187,7 @@ type ResolvedOpenAICompletionsCompat = Omit<
 	thinkingTokenBudgetField?: OpenAICompletionsCompat["thinkingTokenBudgetField"];
 	supportsMidConvoSystemMessages?: OpenAICompletionsCompat["supportsMidConvoSystemMessages"];
 	supportsMidConvoToolAdditions?: OpenAICompletionsCompat["supportsMidConvoToolAdditions"];
+	supportsInContextCompaction?: OpenAICompletionsCompat["supportsInContextCompaction"];
 	vllmPriority?: OpenAICompletionsCompat["vllmPriority"];
 };
 

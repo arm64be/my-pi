@@ -815,6 +815,11 @@ export class SettingsManager {
 		this.save();
 	}
 
+	/** Whether compaction may summarize inside the live conversation on models verified to keep their prompt cache. */
+	getCompactionInContext(): boolean {
+		return this.settings.compaction?.inContext ?? SETTINGS_DEFAULTS.compaction.inContext;
+	}
+
 	private getCompactionTokenSetting(
 		field: keyof CompactionModelOverride,
 		model?: Pick<Model<string>, "provider" | "id">,

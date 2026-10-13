@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added transport-independent client capability bindings for daemon hosts, with per-operation routing, version negotiation, schema validation, and disconnect cancellation. See [Client bindings](docs/client-bindings.md).
+- Added remote authentication continuation through `pi auth --continue` ([#10663](https://github.com/earendil-works/pi/pull/10663) by [@cristinaponcela](https://github.com/cristinaponcela)).
+- Added embedded script highlighting in bash calls ([#10021](https://github.com/earendil-works/pi/pull/10021) by [@mitsuhiko](https://github.com/mitsuhiko)).
+- Added opt-in in-context compaction through `compaction.inContext` ([#10577](https://github.com/earendil-works/pi/pull/10577) by [@mitsuhiko](https://github.com/mitsuhiko)).
+
+### Fixed
+
+- Preserved OpenRouter's reported total cost in HTML exports ([#10286](https://github.com/earendil-works/pi/pull/10286) by [@vegarsti](https://github.com/vegarsti)).
+- Attributed Codex turns and compaction requests separately while retaining current provider hooks ([#9878](https://github.com/earendil-works/pi/pull/9878) by [@mitsuhiko](https://github.com/mitsuhiko)).
+
 ## [1.2.0] - 2026-10-12
 
 ### New Features

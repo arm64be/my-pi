@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added model compatibility metadata for verified in-context compaction ([#10577](https://github.com/earendil-works/pi/pull/10577) by [@mitsuhiko](https://github.com/mitsuhiko)).
+
+### Fixed
+
+- Used OpenRouter's reported billed total for supported streaming APIs, with catalog estimates as fallback ([#10286](https://github.com/earendil-works/pi/pull/10286) by [@vegarsti](https://github.com/vegarsti)).
+- Added Codex request attribution and isolated cached WebSocket connections across credential and endpoint changes ([#9878](https://github.com/earendil-works/pi/pull/9878) by [@mitsuhiko](https://github.com/mitsuhiko)).
+
 ## [1.2.0] - 2026-10-12
 
 ### Added

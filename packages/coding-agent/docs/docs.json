@@ -124,6 +124,10 @@
             {
               "title": "Use the SDK",
               "path": "sdk.md"
+            },
+            {
+              "title": "Client bindings",
+              "path": "client-bindings.md"
             }
           ]
         }

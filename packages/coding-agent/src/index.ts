@@ -25,6 +25,16 @@ export {
 } from "./core/agent-session.ts";
 export { readStoredCredential } from "./core/auth-storage.ts";
 export type { CacheWarmingDecision, CacheWarmingStatus } from "./core/cache-warmer.ts";
+export {
+	type ClientBinding,
+	type ClientBindingConnection,
+	ClientBindingError,
+	type ClientBindingErrorCode,
+	type ClientBindingRequest,
+	ClientBindings,
+	type ClientBindingTransport,
+	type ClientCapability,
+} from "./core/client-bindings.ts";
 // Compaction
 export {
 	type BranchPreparation,

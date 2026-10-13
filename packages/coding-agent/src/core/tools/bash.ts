@@ -235,6 +235,8 @@ export interface ShellToolConfig {
 	label: string;
 	shellName: string;
 	prompt: string;
+	/** Highlight heredoc bodies and inline scripts, which requires POSIX shell syntax. */
+	embeddedCode: boolean;
 	promptSnippet: string;
 	promptGuidelines?: readonly string[];
 	tempFilePrefix: string;
@@ -410,7 +412,7 @@ export function createShellToolDefinition(
 				clearUpdateTimer();
 			}
 		},
-		...createShellRenderers(config.prompt),
+		...createShellRenderers(config.prompt, { embeddedCode: config.embeddedCode }),
 	};
 }
 
@@ -419,6 +421,7 @@ const bashToolConfig: ShellToolConfig = {
 	label: "bash",
 	shellName: "bash",
 	prompt: "$",
+	embeddedCode: true,
 	promptSnippet: bashToolSystemPromptContribution.snippet,
 	promptGuidelines: bashToolSystemPromptContribution.guidelines,
 	tempFilePrefix: "pi-bash",

@@ -37,6 +37,7 @@ import {
 	sessionEntryToContextMessages,
 } from "../session-manager.ts";
 import { combineUsage } from "../usage-totals.ts";
+import { withCompactionRequestMetadata } from "./request-metadata.ts";
 import {
 	computeFileLists,
 	createFileOps,
@@ -1002,6 +1003,7 @@ export async function compact(
 	callbacks?: RetryCallbacks,
 	sessionId?: string,
 ): Promise<CompactionResult> {
+	const attributedStreamFn = withCompactionRequestMetadata(streamFn);
 	const {
 		firstKeptEntryId,
 		messagesToSummarize,
@@ -1031,7 +1033,7 @@ export async function compact(
 				customInstructions,
 				previousSummary,
 				thinkingLevel,
-				streamFn,
+				attributedStreamFn,
 				env,
 				retry,
 				callbacks,
@@ -1049,7 +1051,7 @@ export async function compact(
 			env,
 			signal,
 			thinkingLevel,
-			streamFn,
+			attributedStreamFn,
 			retry,
 			callbacks,
 			sessionId,
@@ -1069,7 +1071,7 @@ export async function compact(
 			customInstructions,
 			previousSummary,
 			thinkingLevel,
-			streamFn,
+			attributedStreamFn,
 			env,
 			retry,
 			callbacks,
@@ -1381,8 +1383,9 @@ export async function compactInContext(
 ): Promise<CompactionResult> {
 	const context = normalizeContext({ messages: appendInContextCompactionRequest(messages, customInstructions) });
 	const requestOptions: SimpleStreamOptions = { ...options, toolChoice: "none" };
+	const attributedStreamFn = withCompactionRequestMetadata(streamFn);
 	const response = await retryAssistantCall(
-		async () => (await streamFn(model, context, requestOptions)).result(),
+		async () => (await attributedStreamFn(model, context, requestOptions)).result(),
 		retry,
 		requestOptions.signal,
 		callbacks,

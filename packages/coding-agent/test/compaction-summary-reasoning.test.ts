@@ -1,5 +1,6 @@
-import type { AgentMessage } from "@earendil-works/pi-agent-core";
+import type { AgentMessage, StreamFn } from "@earendil-works/pi-agent-core";
 import { type AssistantMessage, type Model, normalizeContext, type TranscriptContext } from "@earendil-works/pi-ai";
+import type * as PiAiCompat from "@earendil-works/pi-ai/compat";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
 	type CompactionPreparation,
@@ -14,10 +15,15 @@ const { completeSimpleMock } = vi.hoisted(() => ({
 }));
 
 vi.mock("@earendil-works/pi-ai/compat", async (importOriginal) => {
-	const actual = await importOriginal<typeof import("@earendil-works/pi-ai/compat")>();
+	const actual = await importOriginal<typeof PiAiCompat>();
 	return {
 		...actual,
 		completeSimple: completeSimpleMock,
+		streamSimple: ((model, context, options) => {
+			const stream = actual.createAssistantMessageEventStream();
+			void completeSimpleMock(model, context, options).then((message: AssistantMessage) => stream.end(message));
+			return stream;
+		}) satisfies StreamFn,
 	};
 });
 

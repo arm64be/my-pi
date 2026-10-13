@@ -14,6 +14,7 @@ import {
 	IN_CONTEXT_COMPACTION_INSTRUCTIONS,
 	IN_CONTEXT_COMPACTION_PROMPT,
 } from "../../src/core/compaction/index.ts";
+import { getRequestIdentityMetadata } from "../../src/core/compaction/request-metadata.ts";
 import { SUMMARIZATION_SYSTEM_PROMPT } from "../../src/core/compaction/utils.ts";
 import { createHarness, type Harness, type HarnessOptions } from "./harness.ts";
 
@@ -96,6 +97,10 @@ describe("AgentSession in-context compaction", () => {
 		const { messages, options } = compactionRequest!;
 		expect(options?.toolChoice).toBe("none");
 		expect(options?.sessionId).toBe(SESSION_ID);
+		expect(getRequestIdentityMetadata(options?.metadata)?.requestKind).toBe("compaction");
+		expect(getRequestIdentityMetadata(options?.metadata)?.turnId).not.toBe(
+			getRequestIdentityMetadata(lastTurn.options?.metadata)?.turnId,
+		);
 		// The request repeats the last turn's request, then the reply, then the compaction request.
 		expect(JSON.stringify(messages.slice(0, lastTurn.messages.length))).toBe(JSON.stringify(lastTurn.messages));
 		const tail = messages.slice(lastTurn.messages.length);
